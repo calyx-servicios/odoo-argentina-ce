@@ -3,7 +3,7 @@
     'version': '13.0.1.1.1',
     'category': 'Localization/Argentina',
     'sequence': 14,
-    'author': 'ADHOC SA, Moldeo Interactive,Odoo Community Association (OCA)',
+    'author': 'ADHOC SA, Moldeo Interactive,Odoo Community Association (OCA), Calyx Servicios S.A',
     'license': 'AGPL-3',
     'summary': '',
     'depends': [
