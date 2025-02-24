@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_afip_responsibility_type_form_inherit" model="ir.ui.view">
+        <field name="name">afip.responsibility.type.form.inherit</field>
+        <field name="model">l10n_ar.afip.responsibility.type</field>
+        <field name="inherit_id" ref="l10n_ar.view_afip_responsibility_type_form"/>
+        <field name="arch" type="xml">
+            <group position="inside">
+                <field name="iva_condition_receptor"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_afip_responsibility_type_tree_inherit" model="ir.ui.view">
+        <field name="name">afip.responsibility.type.tree.inherit</field>
+        <field name="model">l10n_ar.afip.responsibility.type</field>
+        <field name="inherit_id" ref="l10n_ar.view_afip_responsibility_type_tree"/>
+        <field name="arch" type="xml">
+            <tree string="AFIP Responsibility Type" decoration-muted="(not active)">
+                <field name="iva_condition_receptor"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
