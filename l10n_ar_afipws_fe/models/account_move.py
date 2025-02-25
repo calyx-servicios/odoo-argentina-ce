@@ -74,6 +74,23 @@ class AccountMove(models.Model):
         "- SI: sí el comprobante asociado (original) se encuentra rechazado por el comprador\n"
         "- NO: sí el comprobante asociado (original) NO se encuentra rechazado por el comprador",
     )
+    afip_iva_condition_receptor = fields.Selection(
+        [
+            ("1", "IVA Responsable Inscripto"),
+            ("6", "Responsable Monotributo"),
+            ("13", "Monotributista Social"),
+            ("16", "Monotributo Trabajador Independiente Promovido"),
+            ("4", "IVA Sujeto Exento"),
+            ("5", "Consumidor Final"),
+            ("7", "Sujeto No Categorizado"),
+            ("8", "Proveedor del Exterior"),
+            ("9", "Cliente del Exterior"),
+            ("10", "IVA Liberado – Ley N° 19.640"),
+            ("15", "IVA No Alcanzado"),
+        ],
+        string="Condición del IVA del Receptor",
+        help="Condición del IVA del sujeto receptor según RG 5616",
+    )
 
     @api.depends("journal_id", "afip_auth_code")
     def _compute_validation_type(self):
@@ -284,6 +301,11 @@ class AccountMove(models.Model):
 
             CbteAsoc = inv.get_related_invoices_data()
 
+            partner_iva_condicion_fiscal_id = (
+                inv.afip_iva_condition_receptor
+                or commercial_partner.l10n_ar_afip_responsibility_type_id.iva_condition_receptor
+            )
+
             # create the invoice internally in the helper
             if afip_ws == "wsfe":
                 ws.CrearFactura(
@@ -306,6 +328,7 @@ class AccountMove(models.Model):
                     fecha_serv_hasta,
                     moneda_id,
                     moneda_ctz,
+                    condicion_iva_receptor=partner_iva_condicion_fiscal_id,
                 )
             # elif afip_ws == 'wsmtxca':
             #     obs_generales = inv.comment
