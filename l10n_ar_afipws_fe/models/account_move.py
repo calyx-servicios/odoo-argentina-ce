@@ -301,6 +301,9 @@ class AccountMove(models.Model):
 
             CbteAsoc = inv.get_related_invoices_data()
 
+            if not commercial_partner.l10n_ar_afip_responsibility_type_id:
+                raise UserError(_("The VAT liability of the company must be reported."))
+
             partner_iva_condicion_fiscal_id = (
                 inv.afip_iva_condition_receptor
                 or commercial_partner.l10n_ar_afip_responsibility_type_id.iva_condition_receptor

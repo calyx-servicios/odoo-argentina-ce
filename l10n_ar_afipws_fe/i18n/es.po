@@ -947,3 +947,9 @@ msgstr "⇒ Obtener Información de Monedas"
 #: model_terms:ir.ui.view,arch_db:l10n_ar_afipws_fe.view_currency_form
 msgid "⇒ Get Rate"
 msgstr "⇒ Obtener Tasa"
+
+#. module: l10n_ar_afipws_fe
+#: code:addons/l10n_ar_afipws_fe/models/account_move.py:304
+#, python-format
+msgid "The VAT liability of the company must be reported."
+msgstr "La responsabilidad fiscal ante el IVA de la compañia debe ser informada."
